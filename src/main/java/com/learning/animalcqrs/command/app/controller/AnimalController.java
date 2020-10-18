@@ -1,5 +1,6 @@
-package com.learning.animalcqrs.app.controller;
+package com.learning.animalcqrs.command.app.controller;
 
+import com.learning.animalcqrs.command.domain.Animal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AnimalController {
     @GetMapping(path = "/animal/{id}")
-    public ResponseEntity<String> getAnimalById(@PathVariable String id) {
-        return ResponseEntity.ok("TODO");
+    public ResponseEntity<Animal> getAnimalById(@PathVariable String id) {
+        Animal animal = new Animal("JoJo", "Mammal", "Monkey", 15);
+        return ResponseEntity.ok(animal);
     }
 
 }
