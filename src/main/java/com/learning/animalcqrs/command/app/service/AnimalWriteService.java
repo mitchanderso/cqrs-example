@@ -1,5 +1,6 @@
 package com.learning.animalcqrs.command.app.service;
 
+import com.learning.animalcqrs.command.app.error.EntityNotFoundException;
 import com.learning.animalcqrs.command.app.interfaces.CreateAnimalRequest;
 import com.learning.animalcqrs.command.app.interfaces.UpdateAnimalRequest;
 import com.learning.animalcqrs.command.domain.Animal;
@@ -7,7 +8,7 @@ import com.learning.animalcqrs.command.domain.AnimalRepository;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.Entity;
 
 @Service
 public class AnimalWriteService {
@@ -24,7 +25,7 @@ public class AnimalWriteService {
     }
 
     public void updateAnimal(UpdateAnimalRequest updateAnimalRequest, Integer id) {
-        Animal previousAnimal = animalRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Animal previousAnimal = animalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 
         if (updateAnimalRequest.getAge() != null) {
             previousAnimal.setAge(updateAnimalRequest.getAge());
