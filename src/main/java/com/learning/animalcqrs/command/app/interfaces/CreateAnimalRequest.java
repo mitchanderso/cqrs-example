@@ -1,5 +1,6 @@
 package com.learning.animalcqrs.command.app.interfaces;
 
+
 public class CreateAnimalRequest {
     private String name;
     private String group;
